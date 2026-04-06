@@ -1,0 +1,54 @@
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
+import androidx.navigation.NavType
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.navArgument
+import com.ваш_пакет.studentplanner.ui_model.*
+Fun StudentPlannerNavHost(...) {
+NavHost(
+navController navController,
+startDestination Screen.Home.route,
+modifier modifier
+){}
+NavHost(...) {
+composable (route Screen.Home.route)
+composable (route Screen.Home.route) {
+HomeScreen(
+onSubjectClick = { subjectId ->
+// Переход на экран деталей с передачей ID
+navController.navigate(Screen.Details.createRoute (subjectId))
+},
+onProfileClick = {
+// Переход на экран профиля navController.navigate(Screen.Profile.route)
+},
+onSettingsClick = {
+// Переход на экран настроек
+navController.navigate(Screen. Settings.route)
+}
+composable(
+route Screen.Details.route,
+arguments = listof(
+navArgument("subjectId") {
+type NavType.StringType
+}
+){ backStackEntry ->
+// Извлекаем параметр subjectid из аргументов навигации
+val subjectId backStackEntry.arguments?.getString("subjectId") "
+DetailsScreen(
+subjectId subjectId,
+onNavigateBack = {
+// Возврат на предыдущий экран navController.popBackStack()
+composable (route= Screen.Profile.route) {
+ProfileScreen(
+onNavigateBack = {
+navController.popBackStack()
+}
+)
+composable (route Screen.Settings.route) {
+SettingsScreen(
+onNavigateBack = {
+navController.popBackStack()
+}
+}
